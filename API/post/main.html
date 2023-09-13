@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <!-- text input -->
+    <!-- <label for="title">title</label>
+    <input type="text" id="title"> -->
+    <!-- image input -->
+    <!-- <label for="name">name</label>
+    <input type="text" id="name">
+
+    <button onclick="adding()">add</button>
+
+    <script>
+        const adding = () => {
+            const title = document.getElementById('title').value;
+            const name = document.getElementById('name').value;
+            const data = { title, name };
+
+            axios.post("https://64fdc847596493f7af7e8fc1.mockapi.io/api/v1/users", data).then((response) => {
+                console.log("تمت الاضافة");
+            });
+        };
+    </script> -->
+    <div>
+        <label for="title">image title</label>
+        <input type="text" id="image-title">
+
+        <label for="image">image</label>
+        <input type="text" id="image">
+
+        
+
+        <select id="category">
+            <option value="comedy">comedy</option>
+            <option value="drama">drama</option>
+            <option value="action">action</option>
+            <option value="sci-fi">sci-fi</option>
+          </select>
+
+        <button onclick="adding()">add</button>
+    </div>
+
+    <ul id="data-list"></ul>
+
+    <script>
+         const adding = () => {
+            const title = document.getElementById('image-title').value;
+            const image = document.getElementById('image').value;
+            const category = document.getElementById('category').value;
+            const data = { title, image , category };
+            axios.post("https://64fdc847596493f7af7e8fc1.mockapi.io/api/v1/users", data).then((response) => {
+                console.log("تمت الاضافة");
+                
+            });
+
+            axios.get("https://64fdc847596493f7af7e8fc1.mockapi.io/api/v1/users").then((response)=> {
+            const api= response.data;
+            console.log(api);
+            const apiTable= document.getElementById("data-list");
+
+            api.map((result) =>{
+                const row= document.createElement("tr");
+                row.innerHTML=`
+                <td>
+                    <div class="card-container">
+                        <h1>${result.title}<h1>
+                        <p>${result.image}</p>
+                        <p>${result.category}</p>
+                    </div>
+                </td>
+                
+                `
+                apiTable.appendChild(row);
+            })
+
+        }) 
+        }
+    </script>
+
+
+    
+</body>
+
+</html>
